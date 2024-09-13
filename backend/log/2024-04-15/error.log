@@ -1,0 +1,2 @@
+2024/04/15 - 08:25:12.387	[31merror[0m	D:/Program Files/Go/file/gin-pro/service/system/jwt_black_list.go:13	加载数据库jwt黑名单失败!	{"error": "Error 1146 (42S02): Table 'gin-pro.jwt_blacklists' doesn't exist"}
+2024/04/15 - 08:27:53.718	[31merror[0m	D:/Program Files/Go/file/gin-pro/service/system/jwt_black_list.go:13	加载数据库jwt黑名单失败!	{"error": "Error 1146 (42S02): Table 'gin-pro.jwt_blacklists' doesn't exist"}

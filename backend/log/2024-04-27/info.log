@@ -1,0 +1,72 @@
+2024/04/27 - 11:34:30.041	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:34:30.062	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 11:34:30.065	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 11:34:30.066	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 11:38:45.805	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:38:45.822	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 11:38:45.825	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 11:38:45.826	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 11:40:07.209	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:40:07.224	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 11:40:07.226	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 11:40:07.227	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 11:40:58.576	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:40:58.590	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 11:40:58.592	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 11:40:58.593	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 11:51:58.798	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:51:58.811	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:52	register swagger handler
+2024/04/27 - 11:51:58.813	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:72	router register success
+2024/04/27 - 11:51:58.814	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 11:52:43.592	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:52:43.606	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 11:52:43.609	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 11:52:43.609	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 11:52:57.096	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:52:57.110	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 11:52:57.113	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 11:52:57.113	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 11:58:10.090	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:58:10.104	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 11:58:10.107	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 11:58:10.108	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 11:58:39.898	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:58:39.913	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 11:58:39.914	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 11:58:39.915	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 11:59:19.534	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 11:59:19.550	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 11:59:19.553	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 11:59:19.554	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 12:54:00.221	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 12:54:00.235	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 12:54:00.237	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 12:54:00.238	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 12:59:20.268	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 12:59:20.283	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 12:59:20.285	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 12:59:20.286	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 12:59:53.220	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 12:59:53.233	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 12:59:53.236	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 12:59:53.237	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 13:25:07.642	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 13:25:07.658	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 13:25:07.660	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 13:25:07.661	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 13:26:03.247	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 13:26:03.262	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 13:26:03.265	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 13:26:03.265	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 13:28:44.097	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 13:28:44.116	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 13:28:44.119	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 13:28:44.120	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 13:28:52.944	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 13:28:52.962	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 13:28:52.966	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 13:28:52.966	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}
+2024/04/27 - 13:46:42.165	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/27 - 13:46:42.179	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:53	register swagger handler
+2024/04/27 - 13:46:42.181	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:73	router register success
+2024/04/27 - 13:46:42.182	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}

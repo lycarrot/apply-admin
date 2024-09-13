@@ -1,0 +1,4 @@
+2024/04/16 - 21:15:43.151	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/gorm.go:42	Register database success
+2024/04/16 - 21:15:43.173	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:52	register swagger handler
+2024/04/16 - 21:15:43.178	[34minfo[0m	D:/Program Files/Go/file/gin-pro/initialize/router.go:71	router register success
+2024/04/16 - 21:15:43.179	[34minfo[0m	D:/Program Files/Go/file/gin-pro/core/server.go:32	server run success on	{"address": ":8888"}

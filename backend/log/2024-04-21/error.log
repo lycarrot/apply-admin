@@ -1,0 +1,1 @@
+2024/04/21 - 08:50:10.530	[31merror[0m	D:/Program Files/Go/file/gin-pro/core/server.go:38	listen tcp :8888: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
