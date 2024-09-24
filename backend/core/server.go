@@ -32,7 +32,7 @@ func RunWindowsServer() {
 	global.GVA_LOG.Info("server run success on", zap.String("address", address))
 
 	fmt.Print(`
-	欢迎使用 gin-pro
+	欢迎使用 gin-apply-admin
 `, address)
 
 	global.GVA_LOG.Error(s.ListenAndServe().Error())

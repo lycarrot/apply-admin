@@ -1,5 +1,10 @@
 package config
 
+import (
+	"gorm.io/gorm/logger"
+	"strings"
+)
+
 type GeneralDB struct {
 	Prefix       string `mapstructure:"prefix" json:"prefix" yaml:"prefix"`
 	Port         string `mapstructure:"port" json:"port" yaml:"port"`
@@ -14,6 +19,21 @@ type GeneralDB struct {
 	MaxOpenConns int    `mapstructure:"max-open-conns" json:"max-open-conns" yaml:"max-open-conns"` // 打开到数据库的最大连接数
 	Singular     bool   `mapstructure:"singular" json:"singular" yaml:"singular"`                   //是否开启全局禁用复数，true表示开启
 	LogZap       bool   `mapstructure:"log-zap" json:"log-zap" yaml:"log-zap"`                      // 是否通过zap写入日志文件
+}
+
+func (c GeneralDB) LogLevel() logger.LogLevel {
+	switch strings.ToLower(c.LogMode) {
+	case "silent", "Silent":
+		return logger.Silent
+	case "error", "Error":
+		return logger.Error
+	case "warn", "Warn":
+		return logger.Warn
+	case "info", "Info":
+		return logger.Info
+	default:
+		return logger.Info
+	}
 }
 
 type SpecializedDB struct {

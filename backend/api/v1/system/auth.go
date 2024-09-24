@@ -12,7 +12,16 @@ import (
 	"time"
 )
 
-func (b *BaseApi) Login(c *gin.Context) {
+type AuthApi struct{}
+
+// Login
+// @Tags Auth
+// @Summary  用户登录
+// @Produce   application/json
+// @Param    data  body      systemReq.Login                                             true  "用户名, 密码, 验证码"
+// @Success  200   {object}  response.Response{data=systemRes.LoginResponse,msg=string}  "返回包括用户信息,token,过期时间"
+// @Router   /auth/login [post]
+func (a *AuthApi) Login(c *gin.Context) {
 	var l systemReq.Login
 	err := c.ShouldBindJSON(&l)
 	key := c.ClientIP()
@@ -43,7 +52,7 @@ func (b *BaseApi) Login(c *gin.Context) {
 			response.FailWithMessage("用户被禁止登", c)
 			return
 		}
-		b.TokenNext(c, *user)
+		a.TokenNext(c, *user)
 		return
 	}
 	global.BlockCache.Increment(key, 1)
@@ -51,7 +60,7 @@ func (b *BaseApi) Login(c *gin.Context) {
 }
 
 // TokenNext 登录以后签发jwt
-func (b *BaseApi) TokenNext(c *gin.Context, user system.SysUser) {
+func (a *AuthApi) TokenNext(c *gin.Context, user system.SysUser) {
 	j := utils.JWT{SigningKey: []byte(global.GVA_CONFIG.Jwt.SigningKey)}
 	claims := j.CreateClaims(systemReq.BaseClaims{
 		UUID:        user.UUID,

@@ -3,9 +3,7 @@ package system
 import "gin-pro/service"
 
 type ApiGroup struct {
-	BaseApi
-	DBApi
-	SystemApiApi
+	AuthApi
 }
 
 var (

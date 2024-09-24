@@ -40,8 +40,9 @@ func Routers() *gin.Engine {
 		//记录请求的详细信息，并输出到标准输出。
 		Router.Use(gin.Logger())
 	}
-	systemRouter := router.RouterGroupApp.System
-	exampleRouter := router.RouterGroupApp.Example
+
+	SystemRouter := router.RouterGroupApp.System
+	ExampleRouter := router.RouterGroupApp.Example
 	//静态文件配置
 	Router.StaticFS(global.GVA_CONFIG.Local.StorePath, justFilesFilesystem{http.Dir(global.GVA_CONFIG.Local.StorePath)})
 	//跨域配置
@@ -51,7 +52,10 @@ func Routers() *gin.Engine {
 	docs.SwaggerInfo.BasePath = global.GVA_CONFIG.System.RouterPrefix
 	Router.GET(global.GVA_CONFIG.System.RouterPrefix+"/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	global.GVA_LOG.Info("register swagger handler")
+
 	PublicGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
+	PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
+
 	{
 		PublicGroup.GET("/health", func(c *gin.Context) {
 			c.JSON(http.StatusOK, "ok")
@@ -59,16 +63,13 @@ func Routers() *gin.Engine {
 	}
 	{
 		// 注册基础功能路由 不做鉴权
-		systemRouter.InitBaseRouter(PublicGroup)
-		// 自动初始化相关
-		systemRouter.InitInitRouter(PublicGroup)
+		SystemRouter.InitAuthRouter(PublicGroup)
 	}
-	PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
+	//PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
 	//middleware.JWTAuth()).Use(middleware.CasbinHandler()
 	PrivateGroup.Use()
 	{
-		systemRouter.InitApiRouter(PrivateGroup, PublicGroup)
-		exampleRouter.InitCustomerRouter(PrivateGroup)
+		ExampleRouter.InitCustomerRouter(PrivateGroup)
 	}
 	global.GVA_LOG.Info("router register success")
 	return Router

@@ -11,6 +11,15 @@ import (
 //go:generate go mod tidy
 //go:generate go mod download
 
+// @title gin-apply-admin API
+// @version 1.0
+// @description  API
+// @host localhost:8080
+// @securityDefinitions.apikey  ApiKeyAuth
+// @in                          header
+// @name                        x-token
+// @BasePath /v1
+
 func main() {
 	//将配置文件的参数读取到全局挂载
 	global.GVA_VP = core.Viper()
@@ -19,9 +28,6 @@ func main() {
 	global.GVA_LOG = core.Zap()
 	//连接数据库
 	global.GVA_DB = initialize.Gorm()
-	//初始化数据库
-	initialize.DBList()
-
 	if global.GVA_DB != nil {
 		//初始化数据库表
 		initialize.RegisterTables()

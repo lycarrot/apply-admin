@@ -15,6 +15,93 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/auth/captcha": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "生成验证码",
+                "responses": {
+                    "200": {
+                        "description": "生成验证码,返回包括随机数id,base64,验证码长度,是否开启验证码",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/response.SysCaptchaResponse"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "用户登录",
+                "parameters": [
+                    {
+                        "description": "用户名, 密码, 验证码",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回包括用户信息,token,过期时间",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/response.LoginResponse"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/customer/customer": {
             "get": {
                 "security": [
@@ -259,83 +346,6 @@ const docTemplate = `{
                 "summary": "分页获取权限客户列表",
                 "responses": {}
             }
-        },
-        "/init/checkdb": {
-            "post": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "CheckDB"
-                ],
-                "summary": "查询用户数据库存在",
-                "responses": {
-                    "200": {
-                        "description": "查询用户数据库存在",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/init/initdb": {
-            "post": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "InitDB"
-                ],
-                "summary": "初始化数据库",
-                "parameters": [
-                    {
-                        "description": "初始化数据库参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/request.InitDB"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "初始化用户数据库",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
         }
     },
     "definitions": {
@@ -378,38 +388,38 @@ const docTemplate = `{
                 }
             }
         },
-        "request.InitDB": {
+        "request.Login": {
             "type": "object",
-            "required": [
-                "dbName"
-            ],
             "properties": {
-                "dbName": {
-                    "description": "数据库名",
+                "captcha": {
+                    "description": "验证码",
                     "type": "string"
                 },
-                "dbPath": {
-                    "description": "sqlite数据库文件路径",
-                    "type": "string"
-                },
-                "dbType": {
-                    "type": "string"
-                },
-                "host": {
-                    "description": "服务器地址",
+                "captchaId": {
+                    "description": "验证码ID",
                     "type": "string"
                 },
                 "password": {
-                    "description": "数据库密码",
+                    "description": "密码",
                     "type": "string"
                 },
-                "port": {
-                    "description": "数据库连接端口",
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "response.LoginResponse": {
+            "type": "object",
+            "properties": {
+                "expiresAt": {
+                    "type": "integer"
+                },
+                "token": {
                     "type": "string"
                 },
-                "userName": {
-                    "description": "数据库用户名",
-                    "type": "string"
+                "user": {
+                    "$ref": "#/definitions/system.SysUser"
                 }
             }
         },
@@ -421,6 +431,23 @@ const docTemplate = `{
                 },
                 "data": {},
                 "msg": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.SysCaptchaResponse": {
+            "type": "object",
+            "properties": {
+                "captchaId": {
+                    "type": "string"
+                },
+                "captchaLength": {
+                    "type": "integer"
+                },
+                "openCaptcha": {
+                    "type": "boolean"
+                },
+                "picPath": {
                     "type": "string"
                 }
             }
@@ -533,17 +560,24 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "x-token",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
+	Version:          "1.0",
+	Host:             "localhost:8080",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "gin-apply-admin API",
+	Description:      "API",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
