@@ -59,6 +59,22 @@ func (a *AuthApi) Login(c *gin.Context) {
 	response.FailWithMessage("验证码错误", c)
 }
 
+// Register
+// @Tags     Auth
+// @Summary  用户注册账号
+// @Produce   application/json
+// @Param    data  body      systemReq.Register                                            true  "用户名, 昵称, 密码, 角色ID"
+// @Success  200   {object}  response.Response{data=systemRes.SysUserResponse,msg=string}  "用户注册账号,返回包括用户信息"
+// @Router   /auth/admin/register [post]
+func (a AuthApi) Register(c *gin.Context) {
+	var r systemReq.Register
+	err := c.ShouldBindJSON(&r)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+}
+
 // TokenNext 登录以后签发jwt
 func (a *AuthApi) TokenNext(c *gin.Context, user system.SysUser) {
 	j := utils.JWT{SigningKey: []byte(global.GVA_CONFIG.Jwt.SigningKey)}
