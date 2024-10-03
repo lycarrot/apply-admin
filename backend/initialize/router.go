@@ -30,46 +30,44 @@ func (fs justFilesFilesystem) Open(name string) (http.File, error) {
 }
 
 func Routers() *gin.Engine {
-	if global.GVA_CONFIG.System.Env == "public" {
-		gin.SetMode(gin.ReleaseMode)
-	}
 	Router := gin.New()
 	//在处理每一个请求时，都会先执行这个中间件，确保请求处理过程中的 panic 能够被正确地恢复。
 	Router.Use(gin.Recovery())
-	if global.GVA_CONFIG.System.Env != "public" {
-		//记录请求的详细信息，并输出到标准输出。
+	if gin.Mode() == gin.DebugMode {
 		Router.Use(gin.Logger())
 	}
 
 	SystemRouter := router.RouterGroupApp.System
-	ExampleRouter := router.RouterGroupApp.Example
+	//ExampleRouter := router.RouterGroupApp.Example
 	//静态文件配置
 	Router.StaticFS(global.GVA_CONFIG.Local.StorePath, justFilesFilesystem{http.Dir(global.GVA_CONFIG.Local.StorePath)})
 	//跨域配置
-	Router.Use(middleware.Cors())
-	Router.Use(middleware.CorsByRules())
+	Router.Use(middleware.CorsHandler())
+	Router.Use(middleware.CorsByRulesHandler())
 
 	docs.SwaggerInfo.BasePath = global.GVA_CONFIG.System.RouterPrefix
 	Router.GET(global.GVA_CONFIG.System.RouterPrefix+"/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	global.GVA_LOG.Info("register swagger handler")
 
 	PublicGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
+
 	PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
+	PrivateGroup.Use(middleware.JWTAuthHandler(), middleware.CasbinHandler())
 
 	{
+		//健康檢查
 		PublicGroup.GET("/health", func(c *gin.Context) {
 			c.JSON(http.StatusOK, "ok")
 		})
 	}
+
 	{
 		// 注册基础功能路由 不做鉴权
-		SystemRouter.InitAuthRouter(PublicGroup)
-	}
-	//PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
-	//middleware.JWTAuth()).Use(middleware.CasbinHandler()
-	PrivateGroup.Use()
-	{
-		ExampleRouter.InitCustomerRouter(PrivateGroup)
+		SystemRouter.InitAuthRouter(PublicGroup)       // 认证路由
+		SystemRouter.InitUserRouter(PrivateGroup)      // 用戶路由
+		SystemRouter.InitMenuRouter(PrivateGroup)      // 菜單路由
+		SystemRouter.InitAuthorityRouter(PrivateGroup) //角色路由
+		SystemRouter.InitApiRouter(PrivateGroup)       //api路由
 	}
 	global.GVA_LOG.Info("router register success")
 	return Router

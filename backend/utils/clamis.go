@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"gin-pro/global"
+	systemReq "gin-pro/model/system/request"
 	"github.com/gin-gonic/gin"
 	"net"
 )
@@ -35,5 +37,28 @@ func ClearToken(c *gin.Context) {
 		c.SetCookie("x-token", "", -1, "/", "", false, false)
 	} else {
 		c.SetCookie("x-token", "", -1, "/", host, false, false)
+	}
+}
+
+func GetClaims(c *gin.Context) (*systemReq.CustomClaims, error) {
+	token := GetToken(c)
+	j := NewJWT()
+	claims, err := j.ParseToken(token)
+	if err != nil {
+		global.GVA_LOG.Error("从Gin的Context中获取从jwt解析信息失败, 请检查请求头是否存在x-token且claims是否为规定结构")
+	}
+	return claims, err
+}
+
+func GetUserAuthorityId(c *gin.Context) uint {
+	if claims, exist := c.Get("claims"); !exist {
+		if cl, err := GetClaims(c); err != nil {
+			return 0
+		} else {
+			return cl.BaseClaims.ID
+		}
+	} else {
+		waitUse := claims.(*systemReq.CustomClaims)
+		return waitUse.AuthorityId
 	}
 }

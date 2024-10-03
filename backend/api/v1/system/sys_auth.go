@@ -27,6 +27,7 @@ func (a *AuthApi) Login(c *gin.Context) {
 	key := c.ClientIP()
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
+		return
 	}
 	//err =
 	//判断验证码是否开启
@@ -73,6 +74,35 @@ func (a AuthApi) Register(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
+	err = utils.Verify(r, utils.RegisterVerify)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+	}
+	var authorities []system.SysAuthority
+	for _, v := range r.AuthorityIds {
+		authorities = append(authorities, system.SysAuthority{AuthorityId: v})
+	}
+
+	user := &system.SysUser{
+		Username:    r.Username,
+		NickName:    r.NickName,
+		Password:    r.Password,
+		HeaderImg:   r.HeaderImg,
+		AuthorityId: r.AuthorityId,
+		Authorities: authorities,
+		Enable:      r.Enable,
+		Phone:       r.Phone,
+		Email:       r.Email,
+	}
+
+	userReturn, err := userService.Register(*user)
+	if err != nil {
+		global.GVA_LOG.Error("注册失败!", zap.Error(err))
+		response.FailWithDetailed(systemRes.SysUserResponse{User: userReturn}, "注册失败", c)
+		return
+	}
+
+	response.OkWithDetailed(systemRes.SysUserResponse{User: userReturn}, "注册成功", c)
 }
 
 // TokenNext 登录以后签发jwt

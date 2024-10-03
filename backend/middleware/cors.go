@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func Cors() gin.HandlerFunc {
+func CorsHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method
 		origin := c.Request.Header.Get("Origin")
@@ -24,9 +24,9 @@ func Cors() gin.HandlerFunc {
 	}
 }
 
-func CorsByRules() gin.HandlerFunc {
+func CorsByRulesHandler() gin.HandlerFunc {
 	if global.GVA_CONFIG.Cors.Mode == "allow-all" {
-		return Cors()
+		return CorsHandler()
 	}
 	return func(c *gin.Context) {
 		whitelist := checkCors(c.GetHeader("origin"))

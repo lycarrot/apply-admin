@@ -5,4 +5,7 @@ type ServiceGroup struct {
 	MenuService
 	InitDBService
 	UserService
+	AuthorityService
+	CasbinService
+	ApiService
 }

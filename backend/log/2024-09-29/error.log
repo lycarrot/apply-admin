@@ -1,0 +1,2 @@
+2024/09/29 - 22:29:18.071	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_menu.go:42	添加失败!	{"error": "当前菜单名称已存在"}
+2024/09/29 - 22:31:46.301	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_menu.go:42	添加失败!	{"error": "当前菜单名称已存在"}

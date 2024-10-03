@@ -7,7 +7,7 @@ import (
 // @function:StructToMap
 // @description:利用反射将结构体转化为map
 // @param:interface{}
-// @return map[string]interface{}
+// @return:map[string]interface{}
 
 func StructToMap(obj interface{}) map[string]interface{} {
 	obj1 := reflect.TypeOf(obj)
@@ -21,4 +21,12 @@ func StructToMap(obj interface{}) map[string]interface{} {
 		}
 	}
 	return data
+}
+
+// @function:Pointer
+// @description: 返回变量对应指针
+// @param: T any
+// @return: *T
+func Pointer[T any](in T) (out *T) {
+	return &in
 }

@@ -1,0 +1,1 @@
+2024/10/03 - 15:22:36.290	[31merror[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:38	listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.

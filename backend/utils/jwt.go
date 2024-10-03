@@ -25,6 +25,7 @@ func NewJWT() *JWT {
 	}
 }
 
+// 将数据加入到claims实例里面去
 func (j *JWT) CreateClaims(baseClaims request.BaseClaims) request.CustomClaims {
 	bf, _ := ParseDuration(global.GVA_CONFIG.Jwt.BufferTime)
 	ep, _ := ParseDuration(global.GVA_CONFIG.Jwt.ExpiresTime)
@@ -48,7 +49,6 @@ func (j *JWT) CreateToken(claims request.CustomClaims) (string, error) {
 }
 
 // CreateTokenByOldToken 旧token 换新token 使用归并回源避免并发问题
-
 func (j *JWT) CreateTokenByOldToken(oldToken string, claims request.CustomClaims) (string, error) {
 	v, err, _ := global.GVA_Concurrency_Control.Do("JWT:"+oldToken, func() (interface{}, error) {
 		return j.CreateToken(claims)
@@ -56,8 +56,11 @@ func (j *JWT) CreateTokenByOldToken(oldToken string, claims request.CustomClaims
 	return v.(string), err
 }
 
-// 解析token
+// 解析token成Claims并返回
 func (j *JWT) ParseToken(tokenString string) (*request.CustomClaims, error) {
+	// 将 tokenString 解析为 token 对象，并将声明填充到 CustomClaims 实例中
+	// 验证 JWT 的签名是否有效
+	// 处理错误
 	token, err := jwt.ParseWithClaims(tokenString, &request.CustomClaims{}, func(token *jwt.Token) (i interface{}, e error) {
 		return j.SigningKey, nil
 	})

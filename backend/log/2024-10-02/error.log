@@ -1,0 +1,2 @@
+2024/10/02 - 18:18:34.734	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:97	注册失败!	{"error": "用户已注册"}
+2024/10/02 - 18:46:06.901	[31merror[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:38	listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
