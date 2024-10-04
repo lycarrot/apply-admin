@@ -7,6 +7,7 @@ type ApiGroup struct {
 	AuthorityApi
 	MenuApi
 	ApiApi
+	CasbinApi
 }
 
 var (

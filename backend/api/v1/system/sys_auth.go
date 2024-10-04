@@ -1,6 +1,7 @@
 package system
 
 import (
+	"fmt"
 	"gin-pro/global"
 	"gin-pro/model/common/response"
 	"gin-pro/model/system"
@@ -50,7 +51,7 @@ func (a *AuthApi) Login(c *gin.Context) {
 		if user.Enable != 1 {
 			global.GVA_LOG.Error("登陆失败! 用户被禁止登录!", zap.Error(err))
 			global.BlockCache.Increment(key, 1)
-			response.FailWithMessage("用户被禁止登", c)
+			response.FailWithMessage("用户被禁止登录", c)
 			return
 		}
 		a.TokenNext(c, *user)
@@ -108,6 +109,7 @@ func (a AuthApi) Register(c *gin.Context) {
 // TokenNext 登录以后签发jwt
 func (a *AuthApi) TokenNext(c *gin.Context, user system.SysUser) {
 	j := utils.JWT{SigningKey: []byte(global.GVA_CONFIG.Jwt.SigningKey)}
+	fmt.Print(user, global.GVA_CONFIG.Jwt.SigningKey)
 	claims := j.CreateClaims(systemReq.BaseClaims{
 		UUID:        user.UUID,
 		ID:          user.ID,
@@ -115,10 +117,12 @@ func (a *AuthApi) TokenNext(c *gin.Context, user system.SysUser) {
 		Username:    user.Username,
 		AuthorityId: user.AuthorityId,
 	})
+
 	token, err := j.CreateToken(claims)
 	if err != nil {
 		global.GVA_LOG.Error("获取token失败", zap.Error(err))
 		response.FailWithMessage("获取token失败", c)
+		return
 	}
 	if !global.GVA_CONFIG.System.UseMultipoint {
 		utils.SetToken(c, token, int(claims.RegisteredClaims.ExpiresAt.Unix()-time.Now().Unix()))

@@ -22,7 +22,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "ApiApi"
+                    "Api"
                 ],
                 "summary": "创建api",
                 "parameters": [
@@ -488,7 +488,7 @@
                 "responses": {}
             }
         },
-        "/menu/addItem": {
+        "/menu/create": {
             "post": {
                 "security": [
                     {

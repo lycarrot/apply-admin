@@ -1,1 +1,14 @@
 2024/10/03 - 15:22:36.290	[31merror[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:38	listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+2024/10/03 - 15:34:11.068	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:120	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 15:35:35.705	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:120	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 16:10:40.817	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:120	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 16:11:45.795	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:120	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 16:30:12.433	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:121	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 16:38:07.108	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:121	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 16:39:00.240	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:121	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 16:53:06.440	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:121	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 16:54:11.712	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:121	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 16:58:14.884	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:121	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 17:02:30.544	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:121	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 17:12:17.428	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:121	获取token失败	{"error": "key is of invalid type"}
+2024/10/03 - 17:17:52.089	[31merror[0m	E:/GoPath/pro/apply-admin/backend/api/v1/system/sys_auth.go:123	获取token失败	{"error": "key is of invalid type"}

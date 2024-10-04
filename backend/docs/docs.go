@@ -29,7 +29,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "ApiApi"
+                    "Api"
                 ],
                 "summary": "创建api",
                 "parameters": [
@@ -495,7 +495,7 @@ const docTemplate = `{
                 "responses": {}
             }
         },
-        "/menu/addItem": {
+        "/menu/create": {
             "post": {
                 "security": [
                     {

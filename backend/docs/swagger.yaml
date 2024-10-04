@@ -354,7 +354,7 @@ paths:
       - ApiKeyAuth: []
       summary: 创建api
       tags:
-      - ApiApi
+      - Api
   /auth/admin/register:
     post:
       parameters:
@@ -601,7 +601,7 @@ paths:
       summary: 分页获取权限客户列表
       tags:
       - ExaCustomer
-  /menu/addItem:
+  /menu/create:
     post:
       consumes:
       - application/json

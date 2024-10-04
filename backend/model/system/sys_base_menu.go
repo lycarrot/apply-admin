@@ -12,7 +12,7 @@ type SysBaseMenu struct {
 	Component     string                                     `json:"component" gorm:"comment:对应前端文件路径"` // 对应前端文件路径
 	Sort          int                                        `json:"sort" gorm:"comment:排序标记"`          // 排序标记
 	Meta          `json:"meta" gorm:"embedded;comment:附加属性"` // 附加属性
-	SysAuthoritys []SysAuthority                             `json:"authoritys" gorm:"many2many:sys_authority_menus;"`
+	SysAuthoritys []SysAuthority                             `json:"authoritys" gorm:"many2many:sys_authority_menu;"`
 	Children      []SysBaseMenu                              `json:"children" gorm:"-"`
 	Parameters    []SysBaseMenuParameter                     `json:"parameters"`
 	MenuBtn       []SysBaseMenuBtn                           `json:"menuBtn"`
@@ -36,5 +36,5 @@ type SysBaseMenuParameter struct {
 }
 
 func (SysBaseMenu) TableName() string {
-	return "sys_base_menu"
+	return "sys_base_menus"
 }

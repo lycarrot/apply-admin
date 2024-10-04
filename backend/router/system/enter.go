@@ -8,6 +8,7 @@ type RouterGroup struct {
 	MenuRouter
 	AuthorityRouter
 	ApiRouter
+	CasbinRouter
 }
 
 var (
@@ -15,4 +16,5 @@ var (
 	authorityApi = v1.ApiGroupApp.SystemApiGroup.AuthorityApi
 	menuApi      = v1.ApiGroupApp.SystemApiGroup.MenuApi
 	apiApi       = v1.ApiGroupApp.SystemApiGroup.ApiApi
+	casbinApi    = v1.ApiGroupApp.SystemApiGroup.CasbinApi
 )

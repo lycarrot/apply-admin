@@ -19,6 +19,8 @@ func RegisterTables() {
 	err := db.AutoMigrate(
 		system.SysUser{},
 		system.SysAuthority{},
+		system.SysApi{},
+		system.SysBaseMenu{},
 		system.JwtBlacklist{},
 		example.ExaCustomer{},
 	)

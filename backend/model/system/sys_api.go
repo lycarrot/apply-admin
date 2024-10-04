@@ -11,6 +11,6 @@ type SysApi struct {
 }
 
 func (SysApi) TableName() string {
-	return "sys_api"
+	return "sys_apis"
 
 }

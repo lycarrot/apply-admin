@@ -13,7 +13,7 @@ type ApiApi struct {
 }
 
 // CreateApi
-// @Tags ApiApi
+// @Tags Api
 // @Summary 创建api
 // @Security  ApiKeyAuth
 // @accept    application/json

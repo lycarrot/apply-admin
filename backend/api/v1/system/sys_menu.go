@@ -11,7 +11,7 @@ import (
 
 type MenuApi struct{}
 
-// AddMenuItem
+// CreateMenuItem
 // @Tags      Menu
 // @Summary   新增菜单
 // @Security  ApiKeyAuth
@@ -19,8 +19,8 @@ type MenuApi struct{}
 // @Produce   application/json
 // @Param	  data body system.SysBaseMenu	true "路由path, 父菜单ID, 路由name, 对应前端文件路径, 排序标记"
 // @success   200  {object}	 response.Response{msg=string}  "新增菜单"
-// @Router    /menu/addItem [post]
-func (m *MenuApi) AddMenuItem(c *gin.Context) {
+// @Router    /menu/create [post]
+func (m *MenuApi) CreateMenuItem(c *gin.Context) {
 	var menu system.SysBaseMenu
 	err := c.ShouldBindJSON(&menu)
 	if err != nil {

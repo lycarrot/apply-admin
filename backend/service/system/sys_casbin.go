@@ -1,12 +1,15 @@
 package system
 
 import (
+	"errors"
 	"gin-pro/global"
+	"gin-pro/model/system/request"
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/model"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
+	"strconv"
 	"sync"
 )
 
@@ -38,7 +41,9 @@ var (
 	once                 sync.Once
 )
 
-// 初始化casbin访问策略控制
+// @function:Casbin
+// @description: 初始化casbin访问策略控制
+// @return: *casbin.SyncedCachedEnforcer
 func (c *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
 	//整个生命周期只执行一次方法
 	once.Do(func() {
@@ -77,4 +82,31 @@ func (c *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
 		_ = syncedCachedEnforcer.LoadPolicy()
 	})
 	return syncedCachedEnforcer
+}
+
+// @function: UpdateCasbin
+// @description: 更新casbin权限
+// @param: authorityId string, casbinInfos []request.CasbinInfo
+// @return: error
+func (c *CasbinService) UpdateCasbin(authorityId uint, casbinInfo []request.CasbinInfo) error {
+	casLists := map[string]bool{}
+	casRules := [][]string{}
+	newAuthorityId := strconv.Itoa(int(authorityId))
+	for _, v := range casbinInfo {
+		key := newAuthorityId + v.Path + v.Method
+		_, ok := casLists[key]
+		if !ok {
+			casLists[key] = true
+			casRules = append(casRules, []string{newAuthorityId, v.Path, v.Method})
+		}
+	}
+	if len(casRules) == 0 {
+		return nil
+	}
+	e := c.Casbin()
+	success, _ := e.AddPolicies(rules)
+	if !success {
+		return errors.New("存在相同api,添加失败")
+	}
+	return nil
 }
