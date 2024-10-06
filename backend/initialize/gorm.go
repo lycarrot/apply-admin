@@ -21,6 +21,7 @@ func RegisterTables() {
 		system.SysAuthority{},
 		system.SysApi{},
 		system.SysBaseMenu{},
+		system.SysOperationRecord{},
 		system.JwtBlacklist{},
 		example.ExaCustomer{},
 	)

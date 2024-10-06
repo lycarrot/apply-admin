@@ -20,7 +20,7 @@ var store = base64Captcha.DefaultMemStore
 // @accept    application/json
 // @Produce   application/json
 // @Success 200 {object} response.Response{data=systemRes.SysCaptchaResponse,msg=string} "生成验证码,返回包括随机数id,base64,验证码长度,是否开启验证码"
-// @Router    /auth/captcha [post]
+// @Router    /auth/captcha [get]
 func (a *AuthApi) Captcha(c *gin.Context) {
 	openCaptcha := global.GVA_CONFIG.Captcha.OpenCaptcha
 	openCaptchaTimeOut := global.GVA_CONFIG.Captcha.OpenCaptchaTimeOut

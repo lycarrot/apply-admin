@@ -1,12 +1,15 @@
 package system
 
-import "github.com/gin-gonic/gin"
+import (
+	"gin-pro/middleware"
+	"github.com/gin-gonic/gin"
+)
 
 type CasbinRouter struct {
 }
 
-func (c *CasbinRouter) InitCasbinRouter(Router *gin.Engine) {
-	router := Router.Group("casbin")
+func (c *CasbinRouter) InitCasbinRouter(Router *gin.RouterGroup) {
+	router := Router.Group("casbin").Use(middleware.OperationRecordHandler())
 	{
 		router.POST("update", casbinApi.UpdateCasbin)
 	}

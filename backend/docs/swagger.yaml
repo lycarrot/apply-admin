@@ -28,6 +28,24 @@ definitions:
       updatedAt:
         type: string
     type: object
+  request.CasbinInReceive:
+    properties:
+      authorityId:
+        type: integer
+      casbinInfos:
+        items:
+          $ref: '#/definitions/request.CasbinInfo'
+        type: array
+    type: object
+  request.CasbinInfo:
+    properties:
+      method:
+        description: 方法
+        type: string
+      path:
+        description: 路径
+        type: string
+    type: object
   request.Login:
     properties:
       captcha:
@@ -81,6 +99,16 @@ definitions:
         type: string
       user:
         $ref: '#/definitions/system.SysUser'
+    type: object
+  response.PageResult:
+    properties:
+      lists: {}
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
     type: object
   response.Response:
     properties:
@@ -382,7 +410,7 @@ paths:
       tags:
       - Auth
   /auth/captcha:
-    post:
+    get:
       consumes:
       - application/json
       produces:
@@ -460,6 +488,34 @@ paths:
       summary: 创建角色
       tags:
       - Authority
+  /casbin/update:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 权限id, 权限模型列表
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.CasbinInReceive'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新角色api权限
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 更新角色api权限
+      tags:
+      - Casbin
   /customer/customer:
     delete:
       consumes:
@@ -629,6 +685,88 @@ paths:
       summary: 新增菜单
       tags:
       - Menu
+  /record/lists:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 主键
+        in: query
+        name: ID
+        type: integer
+      - description: 代理
+        in: query
+        name: agent
+        type: string
+      - description: 请求Body
+        in: query
+        name: body
+        type: string
+      - in: query
+        name: createdAt
+        type: string
+      - description: 错误信息
+        in: query
+        name: error_message
+        type: string
+      - description: 请求ip
+        in: query
+        name: ip
+        type: string
+      - description: 延迟
+        in: query
+        name: latency
+        type: string
+      - description: 请求方法
+        in: query
+        name: method
+        type: string
+      - description: 页码
+        in: query
+        name: page
+        type: integer
+      - description: 每页大小
+        in: query
+        name: pageSize
+        type: integer
+      - description: 请求路径
+        in: query
+        name: path
+        type: string
+      - description: 响应Body
+        in: query
+        name: resp
+        type: string
+      - description: 请求状态
+        in: query
+        name: status
+        type: integer
+      - in: query
+        name: updatedAt
+        type: string
+      - description: 用户id
+        in: query
+        name: user_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 分页获取操作历史列表
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取操作历史记录
+      tags:
+      - OperationRecord
 securityDefinitions:
   ApiKeyAuth:
     in: header

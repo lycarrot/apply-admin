@@ -9,8 +9,3 @@ type SysApi struct {
 	Description string `json:"description" gorm:"comment:描述"`          //描述
 	Method      string `json:"method" gorm:"comment:方法;default:POST;"` //方法:创建POST(默认)|查看GET|更新PUT|删除DELETE
 }
-
-func (SysApi) TableName() string {
-	return "sys_apis"
-
-}

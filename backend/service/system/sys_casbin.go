@@ -7,6 +7,7 @@ import (
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/model"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
+
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 	"strconv"
@@ -37,22 +38,18 @@ func (c *CasbinService) FreshCasbin() (err error) {
 }
 
 var (
-	syncedCachedEnforcer *casbin.SyncedCachedEnforcer
 	once                 sync.Once
+	syncedCachedEnforcer *casbin.SyncedCachedEnforcer
 )
 
-// @function:Casbin
-// @description: 初始化casbin访问策略控制
-// @return: *casbin.SyncedCachedEnforcer
-func (c *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
-	//整个生命周期只执行一次方法
+func (casbinService *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
 	once.Do(func() {
 		a, err := gormadapter.NewAdapterByDB(global.GVA_DB)
 		if err != nil {
-			zap.L().Error("适配数据库失败请检查casbin表是否为InnoDB引擎!", zap.Error(err))
+			zap.L().Error("适配数据库失败，请检查 casbin 表是否为 InnoDB 引擎！", zap.Error(err))
 			return
 		}
-		//casbin控制模型
+
 		text := `
 		[request_definition]
 		r = sub, obj, act
@@ -67,20 +64,26 @@ func (c *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
 		e = some(where (p.eft == allow))
 		
 		[matchers]
-		m = r.sub == p.sub && keyMatch2(r.obj,p.obj) && r.act == p.act
+		m = r.sub == p.sub && keyMatch2(r.obj, p.obj) && r.act == p.act
 		`
 		m, err := model.NewModelFromString(text)
 		if err != nil {
-			zap.L().Error("字符串加载模型失败!", zap.Error(err))
+			zap.L().Error("字符串加载模型失败！", zap.Error(err))
 			return
 		}
-		//创建了一个同步的缓存执行器
-		syncedCachedEnforcer, _ = casbin.NewSyncedCachedEnforcer(m, a)
-		//设置缓存的过期时间，如果策略未更改，执行器将使用缓存的结果。
+
+		syncedCachedEnforcer, err = casbin.NewSyncedCachedEnforcer(m, a)
+		if err != nil {
+			zap.L().Error("创建 SyncedCachedEnforcer 失败！", zap.Error(err))
+			return
+		}
 		syncedCachedEnforcer.SetExpireTime(60 * 60)
-		//将存储在适配器中的策略加载到执行器中，以便进行访问控制检查。
 		_ = syncedCachedEnforcer.LoadPolicy()
 	})
+
+	if syncedCachedEnforcer == nil {
+		zap.L().Error("SyncedCachedEnforcer 未正确初始化")
+	}
 	return syncedCachedEnforcer
 }
 
@@ -104,7 +107,7 @@ func (c *CasbinService) UpdateCasbin(authorityId uint, casbinInfo []request.Casb
 		return nil
 	}
 	e := c.Casbin()
-	success, _ := e.AddPolicies(rules)
+	success, _ := e.AddPolicies(casRules)
 	if !success {
 		return errors.New("存在相同api,添加失败")
 	}

@@ -32,7 +32,7 @@ require (
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/bmatcuk/doublestar/v4 v4.6.1 // indirect
 	github.com/bytedance/sonic v1.11.2 // indirect
-	github.com/casbin/casbin/v2 v2.100.0 // indirect
+	github.com/casbin/casbin/v2 v2.87.1 // indirect
 	github.com/casbin/gorm-adapter/v3 v3.28.0 // indirect
 	github.com/casbin/govaluate v1.2.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect

@@ -52,7 +52,8 @@ func Routers() *gin.Engine {
 	PublicGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
 
 	PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
-	PrivateGroup.Use(middleware.JWTAuthHandler(), middleware.CasbinHandler())
+	//middleware.CasbinHandler()
+	PrivateGroup.Use(middleware.JWTAuthHandler())
 	{
 		//健康檢查
 		PublicGroup.GET("/health", func(c *gin.Context) {
@@ -67,6 +68,8 @@ func Routers() *gin.Engine {
 		SystemRouter.InitMenuRouter(PrivateGroup)              // 菜單路由
 		SystemRouter.InitAuthorityRouter(PrivateGroup)         //角色路由
 		SystemRouter.InitApiRouter(PrivateGroup)               //api路由
+		SystemRouter.InitCasbinRouter(PrivateGroup)            //casbin策略路由
+		SystemRouter.InitOperationRecordRouter(PrivateGroup)   //操作历史路由
 	}
 	global.GVA_LOG.Info("router register success")
 	return Router

@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"gin-pro/global"
 	"gin-pro/model/common/response"
 	"gin-pro/service"
@@ -19,7 +20,8 @@ func CasbinHandler() gin.HandlerFunc {
 		sub := strconv.Itoa(int(claims.AuthorityId))
 		obj := strings.TrimPrefix(c.Request.URL.Path, global.GVA_CONFIG.System.RouterPrefix)
 		act := c.Request.Method
-		success, _ := e.Enforce(sub, obj, act)
+		success, err := e.Enforce(sub, obj, act)
+		fmt.Print(err)
 		if !success {
 			response.FailWithDetailed(gin.H{}, "权限不足", c)
 			c.Abort()
