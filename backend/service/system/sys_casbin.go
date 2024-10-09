@@ -7,8 +7,8 @@ import (
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/model"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
-
 	"go.uber.org/zap"
+
 	"gorm.io/gorm"
 	"strconv"
 	"sync"
@@ -38,18 +38,18 @@ func (c *CasbinService) FreshCasbin() (err error) {
 }
 
 var (
-	once                 sync.Once
 	syncedCachedEnforcer *casbin.SyncedCachedEnforcer
+	once                 sync.Once
 )
 
-func (casbinService *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
+func (c *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
 	once.Do(func() {
-		a, err := gormadapter.NewAdapterByDB(global.GVA_DB)
+		a, err := gormadapter.
+			NewAdapterByDB(global.GVA_DB)
 		if err != nil {
-			zap.L().Error("适配数据库失败，请检查 casbin 表是否为 InnoDB 引擎！", zap.Error(err))
+			zap.L().Error("适配数据库失败请检查casbin表是否为InnoDB引擎!", zap.Error(err))
 			return
 		}
-
 		text := `
 		[request_definition]
 		r = sub, obj, act
@@ -64,26 +64,17 @@ func (casbinService *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
 		e = some(where (p.eft == allow))
 		
 		[matchers]
-		m = r.sub == p.sub && keyMatch2(r.obj, p.obj) && r.act == p.act
+		m = r.sub == p.sub && keyMatch2(r.obj,p.obj) && r.act == p.act
 		`
 		m, err := model.NewModelFromString(text)
 		if err != nil {
-			zap.L().Error("字符串加载模型失败！", zap.Error(err))
+			zap.L().Error("字符串加载模型失败!", zap.Error(err))
 			return
 		}
-
-		syncedCachedEnforcer, err = casbin.NewSyncedCachedEnforcer(m, a)
-		if err != nil {
-			zap.L().Error("创建 SyncedCachedEnforcer 失败！", zap.Error(err))
-			return
-		}
+		syncedCachedEnforcer, _ = casbin.NewSyncedCachedEnforcer(m, a)
 		syncedCachedEnforcer.SetExpireTime(60 * 60)
 		_ = syncedCachedEnforcer.LoadPolicy()
 	})
-
-	if syncedCachedEnforcer == nil {
-		zap.L().Error("SyncedCachedEnforcer 未正确初始化")
-	}
 	return syncedCachedEnforcer
 }
 

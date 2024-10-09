@@ -10,7 +10,6 @@ import (
 // GormMysql 初始化Mysql数据库
 func GormMysql() *gorm.DB {
 	m := global.GVA_CONFIG.Mysql
-
 	if m.Dbname == "" {
 		return nil
 	}
@@ -22,10 +21,6 @@ func GormMysql() *gorm.DB {
 		//控制 GORM 是否跳过与 MySQL 版本相关的初始化
 		SkipInitializeWithVersion: false,
 	}
-	//dialector：数据库连接器。这个参数是一个实现了 gorm.Dialector 接口的对象，用于指定要连接的数据库类型和连接信息。
-	//通常情况下，你可以通过调用特定数据库的 Open 函数来创建一个 dialector 对象。
-	//config：配置选项。这个参数是一个 *gorm.Config 对象，用于配置 GORM 的行为。
-	//可以通过配置选项来指定各种 GORM 的行为，比如设置日志、命名策略、连接池等。
 	if db, err := gorm.Open(mysql.New(mysqlConfig), internal.Gorm.Config(m.Prefix, m.Singular)); err != nil {
 		return nil
 	} else {

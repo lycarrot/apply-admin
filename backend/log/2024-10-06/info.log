@@ -1,0 +1,28 @@
+2024/10/06 - 14:14:48.198	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/gorm.go:32	Register database success
+2024/10/06 - 14:14:48.244	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:50	register swagger handler
+2024/10/06 - 14:14:48.256	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:74	router register success
+2024/10/06 - 14:14:48.266	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:32	server run success on	{"address": ":8080"}
+2024/10/06 - 14:32:11.760	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/gorm.go:32	Register database success
+2024/10/06 - 14:32:11.771	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:50	register swagger handler
+2024/10/06 - 14:32:11.779	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:74	router register success
+2024/10/06 - 14:32:11.789	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:32	server run success on	{"address": ":8080"}
+2024/10/06 - 14:40:51.336	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/gorm.go:32	Register database success
+2024/10/06 - 14:40:51.347	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:50	register swagger handler
+2024/10/06 - 14:40:51.356	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:74	router register success
+2024/10/06 - 14:40:51.365	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:32	server run success on	{"address": ":8080"}
+2024/10/06 - 14:50:38.222	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/gorm.go:32	Register database success
+2024/10/06 - 14:50:38.232	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:50	register swagger handler
+2024/10/06 - 14:50:38.241	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:74	router register success
+2024/10/06 - 14:50:38.248	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:32	server run success on	{"address": ":8080"}
+2024/10/06 - 14:52:43.881	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/gorm.go:32	Register database success
+2024/10/06 - 14:52:43.894	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:50	register swagger handler
+2024/10/06 - 14:52:43.904	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:74	router register success
+2024/10/06 - 14:52:43.915	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:32	server run success on	{"address": ":8080"}
+2024/10/06 - 15:11:32.804	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/gorm.go:32	Register database success
+2024/10/06 - 15:11:32.817	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:50	register swagger handler
+2024/10/06 - 15:11:32.828	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:74	router register success
+2024/10/06 - 15:11:32.838	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:32	server run success on	{"address": ":8080"}
+2024/10/06 - 15:17:26.527	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/gorm.go:32	Register database success
+2024/10/06 - 15:17:26.537	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:50	register swagger handler
+2024/10/06 - 15:17:26.546	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/initialize/router.go:74	router register success
+2024/10/06 - 15:17:26.573	[34minfo[0m	E:/GoPath/pro/apply-admin/backend/core/server.go:32	server run success on	{"address": ":8080"}

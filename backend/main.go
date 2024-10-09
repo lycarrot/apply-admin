@@ -23,17 +23,20 @@ import (
 func main() {
 	//将配置文件的参数读取到全局挂载
 	global.GVA_VP = core.Viper()
-	// 初始化本地缓存对象
+	//// 初始化本地缓存对象
 	initialize.OtherInit()
 	global.GVA_LOG = core.Zap()
 	//连接数据库
 	global.GVA_DB = initialize.Gorm()
+
 	if global.GVA_DB != nil {
 		//初始化数据库表
 		initialize.RegisterTables()
 		db, _ := global.GVA_DB.DB()
+
 		defer db.Close()
 	}
-
 	core.RunWindowsServer()
+	// 连接数据库
+
 }

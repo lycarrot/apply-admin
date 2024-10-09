@@ -1,0 +1,2 @@
+2024/10/08 - 21:40:52.613	[31merror[0m	E:/GoPath/pro/apply-admin/backend/initialize/gorm.go:29	Register database error	{"error": "Error 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'fk_sys_users_authority' in the referenced table 'sys_users'"}
+2024/10/08 - 21:41:23.808	[31merror[0m	E:/GoPath/pro/apply-admin/backend/initialize/gorm.go:29	Register database error	{"error": "Error 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'fk_sys_users_authority' in the referenced table 'sys_users'"}

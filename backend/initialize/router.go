@@ -53,7 +53,7 @@ func Routers() *gin.Engine {
 
 	PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
 	//middleware.CasbinHandler()
-	PrivateGroup.Use(middleware.JWTAuthHandler())
+	PrivateGroup.Use(middleware.JWTAuthHandler(), middleware.CasbinHandler())
 	{
 		//健康檢查
 		PublicGroup.GET("/health", func(c *gin.Context) {

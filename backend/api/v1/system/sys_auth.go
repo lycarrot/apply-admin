@@ -1,7 +1,6 @@
 package system
 
 import (
-	"fmt"
 	"gin-pro/global"
 	"gin-pro/model/common/response"
 	"gin-pro/model/system"
@@ -109,7 +108,6 @@ func (a AuthApi) Register(c *gin.Context) {
 // TokenNext 登录以后签发jwt
 func (a *AuthApi) TokenNext(c *gin.Context, user system.SysUser) {
 	j := utils.JWT{SigningKey: []byte(global.GVA_CONFIG.Jwt.SigningKey)}
-	fmt.Print(user, global.GVA_CONFIG.Jwt.SigningKey)
 	claims := j.CreateClaims(systemReq.BaseClaims{
 		UUID:        user.UUID,
 		ID:          user.ID,
