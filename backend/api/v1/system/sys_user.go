@@ -21,7 +21,7 @@ type UserApi struct {
 // @Produce   application/json
 // @Param     data  query       request.SysUserQuery        true  "query"
 // @Success   200   {object}  response.Response{data=response.PageResult,msg=string}   "列表获取成功"
-// @Router    /user/lists [get]
+// @Router    /user/getLists [get]
 func (u *UserApi) GetUserLists(c *gin.Context) {
 	var query request.SysUserQuery
 	err := c.ShouldBindQuery(&query)

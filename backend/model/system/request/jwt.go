@@ -7,7 +7,7 @@ import (
 
 type BaseClaims struct {
 	UUID        uuid.UUID
-	ID          uint
+	Id          uint
 	Username    string
 	NickName    string
 	AuthorityId uint

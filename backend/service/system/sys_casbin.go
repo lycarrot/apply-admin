@@ -66,7 +66,7 @@ func (c *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
 		`
 		m, err := model.NewModelFromString(text)
 		if err != nil {
-			zap.L().Error("字符串加载模型失败!", zap.Error(err))
+			global.GVA_LOG.Error("模型字符串加载失败", zap.Error(err))
 			return
 		}
 		syncedCachedEnforcer, _ = casbin.NewSyncedCachedEnforcer(m, a)

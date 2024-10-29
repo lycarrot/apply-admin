@@ -4,7 +4,7 @@ definitions:
     type: object
   example.ExaCustomer:
     properties:
-      ID:
+      Id:
         description: 主键
         type: integer
       createdAt:
@@ -61,6 +61,13 @@ definitions:
         description: 用户名
         type: string
     type: object
+  request.OrderItem:
+    properties:
+      field:
+        type: string
+      value:
+        type: string
+    type: object
   request.Register:
     properties:
       authorityId:
@@ -91,25 +98,12 @@ definitions:
         example: 用户名
         type: string
     type: object
-  request.SysApiOrder:
-    properties:
-      bgGroup:
-        type: string
-      description:
-        type: string
-      id:
-        type: string
-      method:
-        type: string
-      path:
-        type: string
-    type: object
   request.SysApiQuery:
     properties:
-      ID:
+      Id:
         description: 主键
         type: integer
-      bgGroup:
+      category:
         description: 分组
         type: string
       createdAt:
@@ -121,9 +115,10 @@ definitions:
         description: 方法:创建POST(默认)|查看GET|更新PUT|删除DELETE
         type: string
       order:
-        allOf:
-        - $ref: '#/definitions/request.SysApiOrder'
         description: 排序查询
+        items:
+          $ref: '#/definitions/request.OrderItem'
+        type: array
       page:
         description: 页码
         type: integer
@@ -215,10 +210,10 @@ definitions:
     type: object
   system.SysApi:
     properties:
-      ID:
+      Id:
         description: 主键
         type: integer
-      bgGroup:
+      category:
         description: 分组
         type: string
       createdAt:
@@ -272,7 +267,7 @@ definitions:
     type: object
   system.SysBaseMenu:
     properties:
-      ID:
+      Id:
         description: 主键
         type: integer
       authoritys:
@@ -320,7 +315,7 @@ definitions:
     type: object
   system.SysBaseMenuBtn:
     properties:
-      ID:
+      Id:
         description: 主键
         type: integer
       createdAt:
@@ -336,7 +331,7 @@ definitions:
     type: object
   system.SysBaseMenuParameter:
     properties:
-      ID:
+      Id:
         description: 主键
         type: integer
       createdAt:
@@ -357,7 +352,7 @@ definitions:
     type: object
   system.SysUser:
     properties:
-      ID:
+      Id:
         description: 主键
         type: integer
       authorities:
@@ -651,7 +646,7 @@ paths:
       parameters:
       - description: 主键
         in: query
-        name: ID
+        name: Id
         type: integer
       - in: query
         name: createdAt
@@ -786,7 +781,7 @@ paths:
       summary: 新增菜单
       tags:
       - Menu
-  /menu/lists:
+  /menu/getLists:
     get:
       parameters:
       - description: 页码
@@ -823,7 +818,7 @@ paths:
       parameters:
       - description: 主键
         in: query
-        name: ID
+        name: Id
         type: integer
       - description: 代理
         in: query
@@ -898,7 +893,7 @@ paths:
       summary: 获取操作历史记录
       tags:
       - OperationRecord
-  /user/lists:
+  /user/getLists:
     get:
       parameters:
       - description: 页码

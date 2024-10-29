@@ -15,6 +15,6 @@ func (a *AuthorityRouter) InitAuthorityRouter(Router *gin.RouterGroup) {
 		router.POST("create", authorityApi.CreateAuthority) //创建角色
 	}
 	{
-		routerNotRecord.POST("lists", authorityApi.GetAuthorityList) //获取角色列表
+		routerNotRecord.POST("getLists", authorityApi.GetAuthorityList) //获取角色列表
 	}
 }

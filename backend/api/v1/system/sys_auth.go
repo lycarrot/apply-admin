@@ -110,7 +110,7 @@ func (a *AuthApi) TokenNext(c *gin.Context, user system.SysUser) {
 	j := utils.JWT{SigningKey: []byte(global.GVA_CONFIG.Jwt.SigningKey)}
 	claims := j.CreateClaims(systemReq.BaseClaims{
 		UUID:        user.UUID,
-		ID:          user.ID,
+		Id:          user.Id,
 		NickName:    user.NickName,
 		Username:    user.Username,
 		AuthorityId: user.AuthorityId,

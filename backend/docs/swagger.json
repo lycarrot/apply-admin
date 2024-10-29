@@ -398,7 +398,7 @@
                     {
                         "type": "integer",
                         "description": "主键",
-                        "name": "ID",
+                        "name": "Id",
                         "in": "query"
                     },
                     {
@@ -672,7 +672,7 @@
                 }
             }
         },
-        "/menu/lists": {
+        "/menu/getLists": {
             "get": {
                 "security": [
                     {
@@ -746,7 +746,7 @@
                     {
                         "type": "integer",
                         "description": "主键",
-                        "name": "ID",
+                        "name": "Id",
                         "in": "query"
                     },
                     {
@@ -857,7 +857,7 @@
                 }
             }
         },
-        "/user/lists": {
+        "/user/getLists": {
             "get": {
                 "security": [
                     {
@@ -1015,7 +1015,7 @@
         "example.ExaCustomer": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
@@ -1099,6 +1099,17 @@
                 }
             }
         },
+        "request.OrderItem": {
+            "type": "object",
+            "properties": {
+                "field": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
         "request.Register": {
             "type": "object",
             "properties": {
@@ -1140,34 +1151,14 @@
                 }
             }
         },
-        "request.SysApiOrder": {
-            "type": "object",
-            "properties": {
-                "bgGroup": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "method": {
-                    "type": "string"
-                },
-                "path": {
-                    "type": "string"
-                }
-            }
-        },
         "request.SysApiQuery": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
-                "bgGroup": {
+                "category": {
                     "description": "分组",
                     "type": "string"
                 },
@@ -1184,11 +1175,10 @@
                 },
                 "order": {
                     "description": "排序查询",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/request.SysApiOrder"
-                        }
-                    ]
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/request.OrderItem"
+                    }
                 },
                 "page": {
                     "description": "页码",
@@ -1325,11 +1315,11 @@
         "system.SysApi": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
-                "bgGroup": {
+                "category": {
                     "description": "分组",
                     "type": "string"
                 },
@@ -1406,7 +1396,7 @@
         "system.SysBaseMenu": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
@@ -1477,7 +1467,7 @@
         "system.SysBaseMenuBtn": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
@@ -1501,7 +1491,7 @@
         "system.SysBaseMenuParameter": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
@@ -1531,7 +1521,7 @@
         "system.SysUser": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },

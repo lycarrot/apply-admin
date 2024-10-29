@@ -20,7 +20,7 @@ type OperationRecordApi struct {
 // @Param	   data  query   request.SysOperationQuery	true "query"
 // @success   200  {object}	 response.Response{data=response.PageResult,msg=string}  "分页获取操作历史列表"
 // @Router    /record/lists [get]
-func (o *OperationRecordApi) GetLists(c *gin.Context) {
+func (o *OperationRecordApi) GetRecordLists(c *gin.Context) {
 	var query request.SysOperationQuery
 	err := c.ShouldBindQuery(&query)
 	if err != nil {

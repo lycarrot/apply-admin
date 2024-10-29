@@ -6,7 +6,6 @@ import (
 	"gin-pro/model/system"
 	"gin-pro/model/system/request"
 	"gorm.io/gorm"
-	"reflect"
 	"strings"
 )
 
@@ -45,8 +44,8 @@ func (a *ApiService) GetApiLists(query request.SysApiQuery) (lists []system.SysA
 	if query.Method != "" {
 		db = db.Where("method = ?", query.Method)
 	}
-	if query.BgGroup != "" {
-		db = db.Where("`group` = ?", query.BgGroup)
+	if query.Category != "" {
+		db = db.Where("category = ?", query.Category)
 	}
 
 	err = db.Count(&total).Error
@@ -54,24 +53,18 @@ func (a *ApiService) GetApiLists(query request.SysApiQuery) (lists []system.SysA
 		return apiLists, total, err
 	}
 	db = db.Limit(limit).Offset(offset)
-	orderVal := reflect.ValueOf(query.Order)
-	orderTyp := orderVal.Type()
 	orderMap := map[string]bool{
-		"Id":          true,
-		"Path":        true,
-		"BgGroup":     true,
-		"Description": true,
-		"Method":      true,
+		"id":          true,
+		"path":        true,
+		"category":    true,
+		"description": true,
+		"method":      true,
 	}
-
 	orderStr := ""
-	l := orderVal.NumField()
 	isFirst := true
-	for i := 0; i < l; i++ {
-		val := orderVal.Field(i).String()
-		name := orderTyp.Field(i).Name
-		if orderMap[name] && (val == "desc" || val == "asc") {
-			item := strings.ToLower(name) + " " + val
+	for _, v := range query.Order {
+		if orderMap[v.Field] && (v.Value == "desc" || v.Value == "asc") {
+			item := strings.ToLower(v.Field) + " " + v.Value
 			if isFirst == false {
 				item = ", " + item
 			}

@@ -405,7 +405,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "主键",
-                        "name": "ID",
+                        "name": "Id",
                         "in": "query"
                     },
                     {
@@ -679,7 +679,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/menu/lists": {
+        "/menu/getLists": {
             "get": {
                 "security": [
                     {
@@ -753,7 +753,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "主键",
-                        "name": "ID",
+                        "name": "Id",
                         "in": "query"
                     },
                     {
@@ -864,7 +864,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/lists": {
+        "/user/getLists": {
             "get": {
                 "security": [
                     {
@@ -1022,7 +1022,7 @@ const docTemplate = `{
         "example.ExaCustomer": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
@@ -1106,6 +1106,17 @@ const docTemplate = `{
                 }
             }
         },
+        "request.OrderItem": {
+            "type": "object",
+            "properties": {
+                "field": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
         "request.Register": {
             "type": "object",
             "properties": {
@@ -1147,34 +1158,14 @@ const docTemplate = `{
                 }
             }
         },
-        "request.SysApiOrder": {
-            "type": "object",
-            "properties": {
-                "bgGroup": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "method": {
-                    "type": "string"
-                },
-                "path": {
-                    "type": "string"
-                }
-            }
-        },
         "request.SysApiQuery": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
-                "bgGroup": {
+                "category": {
                     "description": "分组",
                     "type": "string"
                 },
@@ -1191,11 +1182,10 @@ const docTemplate = `{
                 },
                 "order": {
                     "description": "排序查询",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/request.SysApiOrder"
-                        }
-                    ]
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/request.OrderItem"
+                    }
                 },
                 "page": {
                     "description": "页码",
@@ -1332,11 +1322,11 @@ const docTemplate = `{
         "system.SysApi": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
-                "bgGroup": {
+                "category": {
                     "description": "分组",
                     "type": "string"
                 },
@@ -1413,7 +1403,7 @@ const docTemplate = `{
         "system.SysBaseMenu": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
@@ -1484,7 +1474,7 @@ const docTemplate = `{
         "system.SysBaseMenuBtn": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
@@ -1508,7 +1498,7 @@ const docTemplate = `{
         "system.SysBaseMenuParameter": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },
@@ -1538,7 +1528,7 @@ const docTemplate = `{
         "system.SysUser": {
             "type": "object",
             "properties": {
-                "ID": {
+                "Id": {
                     "description": "主键",
                     "type": "integer"
                 },

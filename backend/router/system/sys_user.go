@@ -15,6 +15,6 @@ func (u *UserRouter) InitUserRouter(Router *gin.RouterGroup) {
 		router.GET("userInfo", userApi.GetUserInfo)
 	}
 	{
-		routerNotRecord.GET("lists", userApi.GetUserLists)
+		routerNotRecord.GET("getLists", userApi.GetUserLists)
 	}
 }

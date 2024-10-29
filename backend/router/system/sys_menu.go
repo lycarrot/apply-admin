@@ -17,6 +17,6 @@ func (m *MenuRouter) InitMenuRouter(Router *gin.RouterGroup) {
 		router.POST("update", menuApi.UpdateMenuItem) //更新菜单
 	}
 	{
-		routerNotRecord.GET("getMenuList", menuApi.GetMenuLists) //获取菜单信息
+		routerNotRecord.GET("getLists", menuApi.GetMenuLists) //获取菜单信息
 	}
 }
