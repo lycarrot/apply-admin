@@ -9,6 +9,7 @@ type ApiGroup struct {
 	ApiApi
 	CasbinApi
 	OperationRecordApi
+	UserApi
 }
 
 var (

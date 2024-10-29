@@ -8,7 +8,6 @@ import (
 	"github.com/casbin/casbin/v2/model"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	"go.uber.org/zap"
-
 	"gorm.io/gorm"
 	"strconv"
 	"sync"
@@ -44,8 +43,7 @@ var (
 
 func (c *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {
 	once.Do(func() {
-		a, err := gormadapter.
-			NewAdapterByDB(global.GVA_DB)
+		a, err := gormadapter.NewAdapterByDB(global.GVA_DB)
 		if err != nil {
 			zap.L().Error("适配数据库失败请检查casbin表是否为InnoDB引擎!", zap.Error(err))
 			return

@@ -5,7 +5,7 @@ import (
 	"gin-pro/model/system"
 )
 
-type SysOperationRecordSearch struct {
+type SysOperationQuery struct {
 	system.SysOperationRecord
-	request.PageInfo
+	request.PageQuery
 }

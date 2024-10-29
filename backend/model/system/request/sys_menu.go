@@ -2,8 +2,13 @@ package request
 
 import (
 	"gin-pro/global"
+	"gin-pro/model/common/request"
 	"gin-pro/model/system"
 )
+
+type SysMenuQuery struct {
+	request.PageQuery
+}
 
 func DefaultMenu() []system.SysBaseMenu {
 	return []system.SysBaseMenu{{

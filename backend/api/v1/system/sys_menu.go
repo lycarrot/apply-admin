@@ -54,6 +54,15 @@ func (m *MenuApi) DelMenuItem(c *gin.Context) {
 func (m *MenuApi) UpdateMenuItem(c *gin.Context) {
 
 }
-func (m *MenuApi) GetMenuLists(c *gin.Context) {
 
+// GetMenuLists
+// @Tags      Menu
+// @Summary   获取菜单列表
+// @Security  ApiKeyAuth
+// @Produce   application/json
+// @Param	   data  query   request.SysMenuQuery	true "列表查询"
+// @success   200  {object}	 response.Response{data=response.PageResult,msg=string}  "分页获取列表"
+// @Router    /menu/lists [get]
+func (m *MenuApi) GetMenuLists(c *gin.Context) {
+	//var query request.SysMenuQuery
 }

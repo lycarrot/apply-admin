@@ -4,6 +4,7 @@ import (
 	"gin-pro/global"
 	"gin-pro/model/common/response"
 	"gin-pro/model/system"
+	"gin-pro/model/system/request"
 	"gin-pro/utils"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -40,4 +41,38 @@ func (a *ApiApi) CreateApi(c *gin.Context) {
 		return
 	}
 	response.OkWithMessage("api创建成功", c)
+}
+
+// GetApiLists
+// @Tags Api
+// @Summary 获取api列表
+// @Security  ApiKeyAuth
+// @Produce   application/json
+// @Param     data  body  request.SysApiQuery      true  "api路径, api中文描述, api组, 方法"
+// @success   200  {object}	 response.Response{data=response.PageResult,msg=string}  "分页获取列表"
+// @Router  /api/getLists [post]
+func (a *ApiApi) GetApiLists(c *gin.Context) {
+	var query request.SysApiQuery
+	err := c.ShouldBindJSON(&query)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	err = utils.Verify(query, utils.PageVerify)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	lists, total, err := apiService.GetApiLists(query)
+	if err != nil {
+		global.GVA_LOG.Error("获取失败!", zap.Error(err))
+		response.FailWithMessage("获取失败", c)
+		return
+	}
+	response.OkWithDetailed(response.PageResult{
+		Lists:    lists,
+		Page:     query.Page,
+		PageSize: query.PageSize,
+		Total:    total,
+	}, "获取成功", c)
 }

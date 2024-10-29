@@ -91,6 +91,60 @@ definitions:
         example: 用户名
         type: string
     type: object
+  request.SysApiOrder:
+    properties:
+      bgGroup:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      method:
+        type: string
+      path:
+        type: string
+    type: object
+  request.SysApiQuery:
+    properties:
+      ID:
+        description: 主键
+        type: integer
+      bgGroup:
+        description: 分组
+        type: string
+      createdAt:
+        type: string
+      description:
+        description: 描述
+        type: string
+      method:
+        description: 方法:创建POST(默认)|查看GET|更新PUT|删除DELETE
+        type: string
+      order:
+        allOf:
+        - $ref: '#/definitions/request.SysApiOrder'
+        description: 排序查询
+      page:
+        description: 页码
+        type: integer
+      pageSize:
+        description: 每页大小
+        type: integer
+      path:
+        description: 路径
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  request.SysUserQuery:
+    properties:
+      page:
+        description: 页码
+        type: integer
+      pageSize:
+        description: 每页大小
+        type: integer
+    type: object
   response.LoginResponse:
     properties:
       expiresAt:
@@ -164,13 +218,13 @@ definitions:
       ID:
         description: 主键
         type: integer
+      bgGroup:
+        description: 分组
+        type: string
       createdAt:
         type: string
       description:
         description: 描述
-        type: string
-      group:
-        description: 分组
         type: string
       method:
         description: 方法:创建POST(默认)|查看GET|更新PUT|删除DELETE
@@ -383,6 +437,34 @@ paths:
       summary: 创建api
       tags:
       - Api
+  /api/getLists:
+    post:
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.SysApiQuery'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 分页获取列表
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取api列表
+      tags:
+      - Api
   /auth/admin/register:
     post:
       parameters:
@@ -488,6 +570,25 @@ paths:
       summary: 创建角色
       tags:
       - Authority
+  /casbin/fresh:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 刷新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      summary: 刷新角色api权限
+      tags:
+      - Casbin
   /casbin/update:
     post:
       consumes:
@@ -685,6 +786,36 @@ paths:
       summary: 新增菜单
       tags:
       - Menu
+  /menu/lists:
+    get:
+      parameters:
+      - description: 页码
+        in: query
+        name: page
+        type: integer
+      - description: 每页大小
+        in: query
+        name: pageSize
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 分页获取列表
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取菜单列表
+      tags:
+      - Menu
   /record/lists:
     get:
       consumes:
@@ -767,6 +898,89 @@ paths:
       summary: 获取操作历史记录
       tags:
       - OperationRecord
+  /user/lists:
+    get:
+      parameters:
+      - description: 页码
+        in: query
+        name: page
+        type: integer
+      - description: 每页大小
+        in: query
+        name: pageSize
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 列表获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户列表
+      tags:
+      - User
+  /user/update:
+    post:
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.SysUserQuery'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 用户信息更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 更新用户信息
+      tags:
+      - User
+  /user/userInfo:
+    post:
+      parameters:
+      - in: query
+        name: id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 用户信息更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户信息
+      tags:
+      - User
 securityDefinitions:
   ApiKeyAuth:
     in: header

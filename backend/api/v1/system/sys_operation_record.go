@@ -17,11 +17,11 @@ type OperationRecordApi struct {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param	   data  query   request.SysOperationRecordSearch	true "路由path, 父菜单ID, 路由name, 对应前端文件路径, 排序标记"
+// @Param	   data  query   request.SysOperationQuery	true "query"
 // @success   200  {object}	 response.Response{data=response.PageResult,msg=string}  "分页获取操作历史列表"
 // @Router    /record/lists [get]
 func (o *OperationRecordApi) GetLists(c *gin.Context) {
-	var query request.SysOperationRecordSearch
+	var query request.SysOperationQuery
 	err := c.ShouldBindQuery(&query)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)

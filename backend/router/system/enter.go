@@ -19,4 +19,5 @@ var (
 	apiApi             = v1.ApiGroupApp.SystemApiGroup.ApiApi
 	casbinApi          = v1.ApiGroupApp.SystemApiGroup.CasbinApi
 	operationRecordApi = v1.ApiGroupApp.SystemApiGroup.OperationRecordApi
+	userApi            = v1.ApiGroupApp.SystemApiGroup.UserApi
 )

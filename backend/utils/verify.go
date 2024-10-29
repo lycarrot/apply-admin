@@ -7,4 +7,5 @@ var (
 	MenuMetaVerify  = Rules{"Title": {NotEmpty()}}
 	ApiVerify       = Rules{"Path": {NotEmpty()}, "Group": {NotEmpty()}, "Description": {NotEmpty()}, "Method": {NotEmpty()}}
 	CasbinVerify    = Rules{"AuthorityId": {NotEmpty()}}
+	PageVerify      = Rules{"Page": {NotEmpty()}, "PageSize": {NotEmpty()}}
 )

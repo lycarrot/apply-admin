@@ -20,9 +20,9 @@ func (o *OperationRecordService) CreateOperationRecord(sysOperationRecord system
 
 // @function: GetOperationRecordLists
 // @description: 获取记录列表
-// @param: query request.SysOperationRecordSearch
-// @return: err error
-func (o *OperationRecordService) GetOperationRecordLists(query request.SysOperationRecordSearch) (lists []system.SysOperationRecord, total int64, err error) {
+// @param: query request.SysOperationQuery
+// @return: lists []system.SysOperationRecord, total int64, err error
+func (o *OperationRecordService) GetOperationRecordLists(query request.SysOperationQuery) (lists []system.SysOperationRecord, total int64, err error) {
 	var limit = query.PageSize
 	var offset = (query.Page - 1) * limit
 	var db = global.GVA_DB.Model(&system.SysOperationRecord{})

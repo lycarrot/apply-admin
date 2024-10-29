@@ -1,12 +1,20 @@
 package system
 
-import "github.com/gin-gonic/gin"
+import (
+	"gin-pro/middleware"
+	"github.com/gin-gonic/gin"
+)
 
 type UserRouter struct{}
 
 func (u *UserRouter) InitUserRouter(Router *gin.RouterGroup) {
-	//userRouter := Router.Group("user")
+	router := Router.Group("user").Use(middleware.OperationRecordHandler())
+	routerNotRecord := Router.Group("user")
 	{
-
+		router.GET("update", userApi.UpdateUser)
+		router.GET("userInfo", userApi.GetUserInfo)
+	}
+	{
+		routerNotRecord.GET("lists", userApi.GetUserLists)
 	}
 }

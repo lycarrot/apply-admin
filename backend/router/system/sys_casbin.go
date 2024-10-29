@@ -10,7 +10,11 @@ type CasbinRouter struct {
 
 func (c *CasbinRouter) InitCasbinRouter(Router *gin.RouterGroup) {
 	router := Router.Group("casbin").Use(middleware.OperationRecordHandler())
+	routerNotRecord := Router.Group("casbin").Use(middleware.OperationRecordHandler())
 	{
 		router.POST("update", casbinApi.UpdateCasbin)
+	}
+	{
+		routerNotRecord.POST("fresh", casbinApi.FreshCasbin)
 	}
 }

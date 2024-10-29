@@ -41,3 +41,20 @@ func (c *CasbinApi) UpdateCasbin(g *gin.Context) {
 	}
 	response.OkWithMessage("添加成功", g)
 }
+
+// FreshCasbin
+// @Tags      Casbin
+// @Summary   刷新角色api权限
+// @accept    application/json
+// @Produce   application/json
+// @Success   200   {object}  response.Response{msg=string}  "刷新成功"
+// @Router    /casbin/fresh [post]
+func (c *CasbinApi) FreshCasbin(g *gin.Context) {
+	err := casbinService.FreshCasbin()
+	if err != nil {
+		response.FailWithMessage("刷新失败", g)
+		global.GVA_LOG.Error("刷新失败", zap.Error(err))
+		return
+	}
+	response.OkWithMessage("刷新成功", g)
+}
