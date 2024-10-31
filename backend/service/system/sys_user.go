@@ -25,11 +25,11 @@ func (u *UserService) GetUserLists(query request.SysUserQuery) (lists []system.S
 	return lists, total, err
 }
 
-// @function: GetUserInfo
+// @function: GetUseDetail
 // @description:查询用户信息
 // @param: id int
 // @return: err error
-func (u *UserService) GetUserInfo(id int) (user system.SysUser, err error) {
+func (u *UserService) GetUseDetail(id int) (user system.SysUser, err error) {
 	err = global.GVA_DB.Where("id = ?", id).First(&user).Error
 	return user, err
 }

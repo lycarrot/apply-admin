@@ -8,3 +8,7 @@ type PageQuery struct {
 type IdQuery struct {
 	Id int `json:"id" form:"id"`
 }
+
+type IdsQuery struct {
+	Ids []int `json:"ids" form:"ids"`
+}

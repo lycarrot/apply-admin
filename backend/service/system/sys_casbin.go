@@ -102,3 +102,30 @@ func (c *CasbinService) UpdateCasbin(authorityId uint, casbinInfo []request.Casb
 	}
 	return nil
 }
+
+// @function: UpdateCasbinApi
+// @description: 更新api casbin权限
+// @param:  oldPath string, oldMethod string, newPath string, newMethod string
+// @return: error
+func (c *CasbinService) UpdateCasbinApi(oldPath string, oldMethod string, newPath string, newMethod string) error {
+	err := global.GVA_DB.Model(&gormadapter.CasbinRule{}).Where("v1 = ? AND V2 = ?", oldPath, oldMethod).Updates(map[string]interface{}{
+		"V1": newPath,
+		"V2": newMethod,
+	}).Error
+	if err != nil {
+		return err
+	}
+	e := c.Casbin()
+	err = e.LoadPolicy()
+	return err
+}
+
+// @function: ClearCasbin
+// @description: 清除api casbin权限
+// @param: v int, p ...string
+// @return: bool
+func (c *CasbinService) ClearCasbin(v int, p ...string) bool {
+	e := c.Casbin()
+	success, _ := e.RemoveFilteredPolicy(v, p...)
+	return success
+}

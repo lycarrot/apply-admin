@@ -46,6 +46,13 @@ definitions:
         description: 路径
         type: string
     type: object
+  request.IdsQuery:
+    properties:
+      ids:
+        items:
+          type: integer
+        type: array
+    type: object
   request.Login:
     properties:
       captcha:
@@ -404,6 +411,34 @@ info:
   title: gin-apply-admin API
   version: "1.0"
 paths:
+  /api/batchDel:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Ids 集合
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.IdsQuery'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 批量删除api
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 删除api
+      tags:
+      - Api
   /api/create:
     post:
       consumes:
@@ -426,6 +461,33 @@ paths:
             - properties:
                 msg:
                   type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 创建api
+      tags:
+      - Api
+  /api/detail/:id:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: api id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取api详情
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/system.SysApi'
               type: object
       security:
       - ApiKeyAuth: []
@@ -458,6 +520,34 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 获取api列表
+      tags:
+      - Api
+  /api/update:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/system.SysApi'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新api
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 更新api
       tags:
       - Api
   /auth/admin/register:
@@ -893,6 +983,33 @@ paths:
       summary: 获取操作历史记录
       tags:
       - OperationRecord
+  /user/detail/:id:
+    get:
+      parameters:
+      - description: 用户id
+        in: query
+        name: data
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 用户信息更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户信息
+      tags:
+      - User
   /user/getLists:
     get:
       parameters:
@@ -949,31 +1066,6 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 更新用户信息
-      tags:
-      - User
-  /user/userInfo:
-    post:
-      parameters:
-      - in: query
-        name: id
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 用户信息更新成功
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/response.PageResult'
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 获取用户信息
       tags:
       - User
 securityDefinitions:

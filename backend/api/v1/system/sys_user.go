@@ -2,13 +2,12 @@ package system
 
 import (
 	"gin-pro/global"
-	requestReq "gin-pro/model/common/request"
 	"gin-pro/model/common/response"
-	"gin-pro/model/system"
 	"gin-pro/model/system/request"
 	"gin-pro/utils"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"strconv"
 )
 
 type UserApi struct {
@@ -60,26 +59,22 @@ func (u *UserApi) UpdateUser(c *gin.Context) {
 
 }
 
-// GetUserInfo
+// GetUseDetail
 // @Tags      User
 // @Summary   获取用户信息
 // @Security  ApiKeyAuth
 // @Produce   application/json
-// @Param     data query      requestReq.IdQuery   true  "用户id"
+// @Param     data query  string   true  "用户id"
 // @Success   200   {object}  response.Response{data=response.PageResult,msg=string}   "用户信息更新成功"
-// @Router    /user/userInfo [post]
-func (u *UserApi) GetUserInfo(c *gin.Context) {
-	var (
-		query requestReq.IdQuery
-		err   error
-		user  system.SysUser
-	)
-	err = c.ShouldBindQuery(&query)
+// @Router    /user/detail/:id [get]
+func (u *UserApi) GetUseDetail(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("参数获取失败", c)
+		global.GVA_LOG.Error("参数获取失败", zap.Error(err))
 		return
 	}
-	user, err = userService.GetUserInfo(query.Id)
+	user, err := userService.GetUseDetail(id)
 	if err != nil {
 		global.GVA_LOG.Error("获取失败", zap.Error(err))
 		response.FailWithMessage("获取失败", c)

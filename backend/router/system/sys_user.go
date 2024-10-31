@@ -12,7 +12,7 @@ func (u *UserRouter) InitUserRouter(Router *gin.RouterGroup) {
 	routerNotRecord := Router.Group("user")
 	{
 		router.GET("update", userApi.UpdateUser)
-		router.GET("userInfo", userApi.GetUserInfo)
+		router.GET("detail/:id", userApi.GetUseDetail)
 	}
 	{
 		routerNotRecord.GET("getLists", userApi.GetUserLists)
